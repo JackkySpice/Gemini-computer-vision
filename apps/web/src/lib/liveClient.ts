@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5050';
 

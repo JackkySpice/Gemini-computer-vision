@@ -1,5 +1,5 @@
-import { GoogleGenerativeAI } from '@google/genai';
-import type { ERPoint, ERTrajectory } from '../types.js';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import type { ERPoint, ERTrajectory } from '../types';
 
 const apiKey = process.env.GEMINI_API_KEY || '';
 if (!apiKey) {

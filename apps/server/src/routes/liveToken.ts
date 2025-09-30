@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createEphemeralToken } from '../lib/gemini.js';
-import type { LiveTokenRequest, LiveTokenResponse } from '../types.js';
+import { createEphemeralToken } from '../lib/gemini';
+import type { LiveTokenRequest, LiveTokenResponse } from '../types';
 
 const router = Router();
 

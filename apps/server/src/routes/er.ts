@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { callER } from '../lib/gemini.js';
-import type { ERFrameRequest, ERFrameResponse } from '../types.js';
+import { callER } from '../lib/gemini';
+import type { ERFrameRequest, ERFrameResponse } from '../types';
 
 const router = Router();
 

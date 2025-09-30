@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import pino from 'pino';
-import erRouter from './routes/er.js';
-import liveTokenRouter from './routes/liveToken.js';
+import erRouter from './routes/er';
+import liveTokenRouter from './routes/liveToken';
 
 dotenv.config();
 
