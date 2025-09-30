@@ -55,14 +55,14 @@ export async function callER(
   logger.debug({ model: 'gemini-robotics-er-1.5-preview' }, 'Calling Gemini ER API');
 
   try {
+    // Note: thinkingConfig/thinkingBudget is not yet available in the current API
+    // Using standard generation config instead
     const result = await model.generateContent({
       contents: [{ role: 'user', parts: [image, { text: prompt }] }],
       generationConfig: {
         temperature: 0.5,
-      },
-      // @ts-ignore - thinking config may not be in types yet
-      thinkingConfig: {
-        thinkingBudget,
+        // maxOutputTokens can be adjusted based on thinking budget
+        maxOutputTokens: thinkingBudget > 4 ? 2048 : 1024,
       },
     });
 

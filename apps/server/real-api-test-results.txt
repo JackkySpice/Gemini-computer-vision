@@ -1,0 +1,146 @@
+
+> @app/server@1.0.0 test /workspace/apps/server
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v1.6.1 /workspace/apps/server
+
+{"level":30,"time":1759253556273,"pid":10277,"hostname":"cursor","action":"callER","promptLength":217,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556386,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":113,"msg":"ER API call failed"}
+stderr | src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should process frame request with mock data
+ER frame error: GoogleGenerativeAIFetchError: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name "thinkingConfig": Cannot find field. [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"description":"Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field."}]}]
+    at handleResponseNotOk (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:412:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at makeRequest (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:385:9)
+    at generateContent (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:830:22)
+    at Module.callER (/workspace/apps/server/src/lib/gemini.ts:58:20)
+    at /workspace/apps/server/src/routes/er.ts:49:21 {
+  status: 400,
+  statusText: 'Bad Request',
+  errorDetails: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+{"level":30,"time":1759253556394,"pid":10277,"hostname":"cursor","action":"callER","promptLength":223,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556494,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":100,"msg":"ER API call failed"}
+stderr | src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should handle boxes mode
+ER frame error: GoogleGenerativeAIFetchError: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name "thinkingConfig": Cannot find field. [{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"description":"Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field."}]}]
+    at handleResponseNotOk (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:412:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at makeRequest (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:385:9)
+    at generateContent (file:///workspace/node_modules/.pnpm/@google+generative-ai@0.21.0/node_modules/@google/generative-ai/dist/index.mjs:830:22)
+    at Module.callER (/workspace/apps/server/src/lib/gemini.ts:58:20)
+    at /workspace/apps/server/src/routes/er.ts:49:21 {
+  status: 400,
+  statusText: 'Bad Request',
+  errorDetails: [
+    {
+      '@type': 'type.googleapis.com/google.rpc.BadRequest',
+      fieldViolations: [Array]
+    }
+  ]
+}
+
+{"level":30,"time":1759253556497,"pid":10277,"hostname":"cursor","model":"gemini-2.5-flash-native-audio-preview-09-2025","msg":"Creating ephemeral token"}
+{"level":40,"time":1759253556498,"pid":10277,"hostname":"cursor","error":"Cannot read properties of undefined (reading 'create')","msg":"Failed to create ephemeral token, using API key directly"}
+{"level":30,"time":1759253556500,"pid":10277,"hostname":"cursor","model":"gemini-live-2.5-flash-preview","msg":"Creating ephemeral token"}
+{"level":40,"time":1759253556500,"pid":10277,"hostname":"cursor","error":"Cannot read properties of undefined (reading 'create')","msg":"Failed to create ephemeral token, using API key directly"}
+{"level":30,"time":1759253556502,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556569,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":67,"msg":"ER API call failed"}
+{"level":30,"time":1759253556569,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556682,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":113,"msg":"ER API call failed"}
+{"level":30,"time":1759253556683,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556745,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":62,"msg":"ER API call failed"}
+{"level":30,"time":1759253556746,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556874,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":128,"msg":"ER API call failed"}
+{"level":30,"time":1759253556874,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253556932,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":58,"msg":"ER API call failed"}
+{"level":30,"time":1759253556932,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557056,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":124,"msg":"ER API call failed"}
+{"level":30,"time":1759253557056,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557108,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":52,"msg":"ER API call failed"}
+{"level":30,"time":1759253557108,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557235,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":127,"msg":"ER API call failed"}
+{"level":30,"time":1759253557235,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557282,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":47,"msg":"ER API call failed"}
+{"level":30,"time":1759253557282,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557408,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":126,"msg":"ER API call failed"}
+{"level":30,"time":1759253557411,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557457,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":46,"msg":"ER API call failed"}
+{"level":30,"time":1759253557457,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557582,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":125,"msg":"ER API call failed"}
+{"level":30,"time":1759253557582,"pid":10277,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":50,"time":1759253557636,"pid":10277,"hostname":"cursor","error":"[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.5-preview:generateContent: [400 Bad Request] Invalid JSON payload received. Unknown name \"thinkingConfig\": Cannot find field. [{\"@type\":\"type.googleapis.com/google.rpc.BadRequest\",\"fieldViolations\":[{\"description\":\"Invalid JSON payload received. Unknown name \\\"thinkingConfig\\\": Cannot find field.\"}]}]","latency":54,"msg":"ER API call failed"}
+ ❯ src/tests/server.test.ts  (11 tests | 3 failed) 1395ms
+   ❯ src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should process frame request with mock data
+     → expected 200 "OK", got 500 "Internal Server Error"
+   ❯ src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should handle boxes mode
+     → expected 200 "OK", got 500 "Internal Server Error"
+   ❯ src/tests/server.test.ts > Server Integration Tests > Benchmark Endpoint > should run benchmark with custom iterations
+     → expected 0 to be greater than 0
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should process frame request with mock data
+Error: expected 200 "OK", got 500 "Internal Server Error"
+ ❯ src/tests/server.test.ts:47:10
+     45|           thinkingBudget: 0,
+     46|         })
+     47|         .expect(200);
+       |          ^
+     48| 
+     49|       expect(response.body).toHaveProperty('results');
+ ❯ Test._assertStatus ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:252:14
+ ❯ ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:308:13
+ ❯ Test._assertFunction ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:285:13
+ ❯ Test.assert ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:164:23
+ ❯ Server.localAssert ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:120:14
+ ❯ Object.onceWrapper node:events:632:28
+ ❯ Server.emit node:events:518:28
+ ❯ emitCloseNT node:net:2418:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/tests/server.test.ts > Server Integration Tests > ER Frame Processing > should handle boxes mode
+Error: expected 200 "OK", got 500 "Internal Server Error"
+ ❯ src/tests/server.test.ts:75:10
+     73|           thinkingBudget: 0,
+     74|         })
+     75|         .expect(200);
+       |          ^
+     76| 
+     77|       expect(response.body).toHaveProperty('results');
+ ❯ Test._assertStatus ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:252:14
+ ❯ ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:308:13
+ ❯ Test._assertFunction ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:285:13
+ ❯ Test.assert ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:164:23
+ ❯ Server.localAssert ../../node_modules/.pnpm/supertest@6.3.4/node_modules/supertest/lib/test.js:120:14
+ ❯ Object.onceWrapper node:events:632:28
+ ❯ Server.emit node:events:518:28
+ ❯ emitCloseNT node:net:2418:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/tests/server.test.ts > Server Integration Tests > Benchmark Endpoint > should run benchmark with custom iterations
+AssertionError: expected 0 to be greater than 0
+ ❯ src/tests/server.test.ts:130:40
+    128|       expect(response.body.iterations).toBe(3);
+    129|       expect(response.body.results.length).toBe(3);
+    130|       expect(response.body.avgLatency).toBeGreaterThan(0);
+       |                                        ^
+    131|     });
+    132|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 8 passed (11)
+   Start at  17:32:35
+   Duration  1.77s (transform 53ms, setup 0ms, collect 150ms, tests 1.40s, environment 0ms, prepare 58ms)
+
+ ELIFECYCLE  Test failed. See above for more details.
