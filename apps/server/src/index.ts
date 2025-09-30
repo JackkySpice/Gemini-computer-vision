@@ -4,10 +4,11 @@ import dotenv from 'dotenv';
 import pino from 'pino';
 import erRouter from './routes/er';
 import liveTokenRouter from './routes/liveToken';
+import benchmarkRouter from './routes/benchmark';
 
 dotenv.config();
 
-const logger = pino({ level: 'info' });
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 const app = express();
 const PORT = process.env.PORT || 5050;
 
@@ -30,6 +31,7 @@ app.get('/health', (req, res) => {
 // Routes
 app.use('/api/er', erRouter);
 app.use('/api/live', liveTokenRouter);
+app.use('/api/er/benchmark', benchmarkRouter);
 
 // Error handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

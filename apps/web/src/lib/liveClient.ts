@@ -13,8 +13,11 @@ export class LiveClient {
   private session: any = null;
   private config: LiveClientConfig;
   private token: string | null = null;
+  private tokenExpireTime: string | null = null;
+  private newSessionExpireTime: string | null = null;
   private audioContext: AudioContext | null = null;
   private mediaStream: MediaStream | null = null;
+  private refreshInterval: NodeJS.Timeout | null = null;
 
   constructor(config: LiveClientConfig) {
     this.config = config;
@@ -37,6 +40,11 @@ export class LiveClient {
 
       const data = await response.json();
       this.token = data.token;
+      this.tokenExpireTime = data.expireTime;
+      this.newSessionExpireTime = data.newSessionExpireTime;
+
+      // Set up auto-refresh before newSessionExpireTime (9 minutes)
+      this.setupTokenAutoRefresh();
 
       // Create client with ephemeral token
       this.client = new GoogleGenerativeAI(this.token);
@@ -126,7 +134,52 @@ export class LiveClient {
     await this.session.sendText?.(text);
   }
 
+  private setupTokenAutoRefresh() {
+    // Clear any existing refresh interval
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+
+    // Calculate time until refresh (8 minutes = 480 seconds)
+    const refreshTime = 8 * 60 * 1000; // 8 minutes in ms
+    
+    console.log('Setting up token auto-refresh in 8 minutes');
+    
+    this.refreshInterval = setInterval(async () => {
+      console.log('Auto-refreshing ephemeral token');
+      try {
+        const response = await fetch(`${SERVER_URL}/api/live/token`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          this.token = data.token;
+          this.tokenExpireTime = data.expireTime;
+          this.newSessionExpireTime = data.newSessionExpireTime;
+          
+          // Recreate client with new token
+          if (this.token) {
+            this.client = new GoogleGenerativeAI(this.token);
+            console.log('Token refreshed successfully');
+          }
+        }
+      } catch (error) {
+        console.error('Failed to refresh token:', error);
+        this.config.onError?.(error as Error);
+      }
+    }, refreshTime);
+  }
+
   stop() {
+    // Clear token refresh interval
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+    }
+
     if (this.session) {
       // @ts-ignore
       this.session.disconnect?.();
@@ -140,5 +193,7 @@ export class LiveClient {
 
     this.client = null;
     this.token = null;
+    this.tokenExpireTime = null;
+    this.newSessionExpireTime = null;
   }
 }
