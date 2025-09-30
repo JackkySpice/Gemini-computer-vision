@@ -43,6 +43,10 @@ export class LiveClient {
       this.tokenExpireTime = data.expireTime;
       this.newSessionExpireTime = data.newSessionExpireTime;
 
+      if (!this.token) {
+        throw new Error('No token received from server');
+      }
+
       // Set up auto-refresh before newSessionExpireTime (9 minutes)
       this.setupTokenAutoRefresh();
 

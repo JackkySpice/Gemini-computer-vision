@@ -19,9 +19,11 @@ export default function VideoCanvas() {
 
   // Start camera
   useEffect(() => {
+    let mediaStream: MediaStream | null = null;
+
     const startCamera = async () => {
       try {
-        const mediaStream = await navigator.mediaDevices.getUserMedia({
+        mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { width: 1280, height: 720 },
           audio: true,
         });
@@ -38,8 +40,8 @@ export default function VideoCanvas() {
     startCamera();
 
     return () => {
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
+      if (mediaStream) {
+        mediaStream.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
