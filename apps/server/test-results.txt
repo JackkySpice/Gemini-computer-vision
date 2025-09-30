@@ -1,0 +1,76 @@
+
+> @app/server@1.0.0 test /workspace/apps/server
+> vitest run
+
+▲ [WARNING] Duplicate key "scripts" in object literal [duplicate-object-key]
+
+    package.json:30:2:
+      30 │   "scripts": {
+         ╵   ~~~~~~~~~
+
+  The original key "scripts" is here:
+
+    package.json:5:2:
+      5 │   "scripts": {
+        ╵   ~~~~~~~~~
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v1.6.1 /workspace/apps/server
+
+{"level":30,"time":1759253183539,"pid":7843,"hostname":"cursor","action":"callER","promptLength":217,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253183539,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253183840,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253183845,"pid":7843,"hostname":"cursor","action":"callER","promptLength":223,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253183845,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253184146,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253184149,"pid":7843,"hostname":"cursor","model":"gemini-2.5-flash-native-audio-preview-09-2025","msg":"Creating ephemeral token"}
+{"level":30,"time":1759253184149,"pid":7843,"hostname":"cursor","msg":"Returning mock ephemeral token"}
+{"level":30,"time":1759253184151,"pid":7843,"hostname":"cursor","model":"gemini-live-2.5-flash-preview","msg":"Creating ephemeral token"}
+{"level":30,"time":1759253184152,"pid":7843,"hostname":"cursor","msg":"Returning mock ephemeral token"}
+{"level":30,"time":1759253184156,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253184156,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253184456,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253184456,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253184456,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253184756,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253184756,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253184756,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253185056,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253185056,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253185056,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253185357,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253185357,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253185357,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253185658,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253185658,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253185658,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253185959,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253185959,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253185959,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253186260,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253186260,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253186260,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253186560,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253186560,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253186560,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253186861,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253186861,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253186861,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253187161,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253187163,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253187163,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253187464,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253187464,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253187464,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253187764,"pid":7843,"hostname":"cursor","latency":300,"msg":"Mock ER response completed"}
+{"level":30,"time":1759253187764,"pid":7843,"hostname":"cursor","action":"callER","promptLength":59,"imageSize":384,"thinkingBudget":0,"msg":"Starting ER API call"}
+{"level":30,"time":1759253187764,"pid":7843,"hostname":"cursor","useMock":true,"hasClient":false,"msg":"Using mock ER response"}
+{"level":30,"time":1759253188065,"pid":7843,"hostname":"cursor","latency":301,"msg":"Mock ER response completed"}
+ ✓ src/tests/server.test.ts  (11 tests) 4557ms
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  17:26:23
+   Duration  4.90s (transform 44ms, setup 1ms, collect 138ms, tests 4.56s, environment 0ms, prepare 53ms)
+
