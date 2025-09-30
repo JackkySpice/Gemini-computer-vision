@@ -286,21 +286,55 @@ pnpm build
 pnpm start
 ```
 
+## Deployment
+
+### 🚀 Quick Deploy (5 minutes)
+
+**Got a Vercel error?** → See [DEPLOYMENT_FIX_SUMMARY.md](DEPLOYMENT_FIX_SUMMARY.md)
+
+**Quick Steps:**
+1. **Backend (Railway):** Set Root Directory: `apps/server`
+2. **Frontend (Vercel):** Set Root Directory: `apps/web` ← **CRITICAL!**
+3. Configure environment variables
+4. Deploy!
+
+### 📚 Complete Documentation
+
+**→ Start Here:** [DEPLOYMENT_INDEX.md](DEPLOYMENT_INDEX.md) - Complete documentation index
+
+**Quick Links:**
+- 📖 **[Quick Start Guide](DEPLOYMENT_QUICK_START.md)** - 5-minute deployment
+- 📖 **[Vercel Deployment](VERCEL_DEPLOYMENT.md)** - Comprehensive guide
+- 📖 **[Architecture Diagram](DEPLOYMENT_DIAGRAM.md)** - System architecture
+- 📖 **[Issue Resolution](DEPLOYMENT_ISSUES_FIXED.md)** - Troubleshooting
+- 📖 **[Fix Summary](DEPLOYMENT_FIX_SUMMARY.md)** - Error solutions
+
+**Helper Scripts:**
+```bash
+./deploy-vercel.sh   # Deploy frontend to Vercel (automated)
+./deploy-railway.sh  # Deploy backend to Railway (automated)
+```
+
 ## Roadmap
 
+- [x] Deployment guides (Vercel, Railway, etc.) ✅
 - [ ] LiveKit integration for WebRTC
 - [ ] Multi-frame video tracking
 - [ ] ROS/robotics controller integration
 - [ ] Object persistence across frames
 - [ ] Demo image upload (no camera)
-- [ ] Deployment guides (Vercel, Railway, etc.)
 
 ## Resources
 
+**API Documentation:**
 - [Gemini ER 1.5 Docs](https://ai.google.dev/gemini-api/docs/robotics-overview)
 - [Live API Guide](https://ai.google.dev/gemini-api/docs/live)
 - [Ephemeral Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens)
 - [LiveKit Integration](https://docs.livekit.io/agents/integrations/realtime/gemini/)
+
+**Deployment:**
+- [Vercel Documentation](https://vercel.com/docs)
+- [Railway Documentation](https://docs.railway.app)
 
 ## License
 
