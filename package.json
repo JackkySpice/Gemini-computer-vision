@@ -1,0 +1,15 @@
+{
+  "name": "gemini-robotics-live",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter @app/web dev",
+    "dev:server": "pnpm --filter @app/server dev",
+    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:web\"",
+    "build": "pnpm --filter @app/server build && pnpm --filter @app/web build",
+    "start": "concurrently \"pnpm --filter @app/server start\" \"pnpm --filter @app/web start\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
