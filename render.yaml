@@ -1,0 +1,43 @@
+services:
+  # Backend Service (Express API)
+  - type: web
+    name: gemini-robotics-backend
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: apps/server
+    buildCommand: cd /opt/render/project/src && npm install -g pnpm && pnpm install && pnpm build
+    startCommand: node dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5050
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: WEB_ORIGIN
+        fromService:
+          type: web
+          name: gemini-robotics-frontend
+          property: hostport
+
+  # Frontend Service (Next.js)
+  - type: web
+    name: gemini-robotics-frontend
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: apps/web
+    buildCommand: cd /opt/render/project/src && npm install -g pnpm && pnpm install && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SERVER_URL
+        fromService:
+          type: web
+          name: gemini-robotics-backend
+          property: hostport
