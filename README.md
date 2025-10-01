@@ -1,361 +1,55 @@
-# Gemini Robotics Live
+# AI Chat - Gemini Assistant 🤖
 
-A production-ready web application combining **Gemini Robotics-ER 1.5** for spatial reasoning and **Gemini Live API** for real-time conversational AI. Stream your webcam to detect objects, track trajectories, and interact with AI using voice and text.
+A beautiful, responsive chat interface with Messenger-style design that connects to Google's Gemini AI. Perfect for desktop and mobile devices with no overflow issues.
 
-![Demo](https://img.shields.io/badge/Status-Preview-orange)
-![License](https://img.shields.io/badge/License-MIT-blue)
+## ✨ Features
 
-## 🚀 One-Click Deploy
+- **Beautiful Messenger-Style UI**: Modern gradient design inspired by Facebook Messenger
+- **Fully Responsive**: Works perfectly on desktop, tablet, and mobile devices
+- **No Overflow**: Carefully designed to prevent horizontal scrolling on any device
+- **Gemini AI Integration**: Powered by Google's Gemini Pro AI model
+- **Real-time Chat**: Smooth animations and typing indicators
+- **Auto-resizing Input**: Text area grows as you type
+- **Accessibility**: ARIA labels and keyboard navigation support
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JackkySpice/Gemini-computer-vision)
+## 🚀 Getting Started
 
-Deploy both frontend and backend to Render with a single click! See [ONE_CLICK_DEPLOY.md](ONE_CLICK_DEPLOY.md) for details.
+1. Simply open `index.html` in your browser
+2. Start chatting with the AI assistant!
 
-## Features
+## 📱 Mobile Compatibility
 
-- 🎥 **Real-time Webcam Processing**: Stream video and get instant spatial analysis
-- 🤖 **Gemini Robotics-ER 1.5**: Point detection, bounding boxes, and trajectory planning
-- 🎙️ **Gemini Live API**: Voice-based interaction with low-latency audio streaming
-- 🔒 **Secure Architecture**: Ephemeral tokens, no API keys exposed to browser
-- ⚡ **Optimized Performance**: Frame downscaling, throttling, and smart caching
-- 🎨 **Modern UI**: Built with Next.js 14 and Tailwind CSS
+- Touch-optimized interface
+- Proper viewport scaling
+- Prevents iOS zoom on input focus
+- Optimized font sizes for mobile readability
+- Responsive message bubbles that adapt to screen size
 
-## Architecture
+## 🎨 Design Features
 
-### Monorepo Structure
+- Gradient backgrounds with purple/blue theme
+- Smooth animations and transitions
+- Clean, modern typography using Inter font
+- Accessible color contrast
+- Reduced motion support for accessibility
 
-```
-├── apps/
-│   ├── web/          # Next.js 14 frontend (TypeScript, App Router)
-│   └── server/       # Express backend (Node 20)
-├── pnpm-workspace.yaml
-└── package.json
-```
+## 🔧 Technology Stack
 
-### Tech Stack
+- Pure HTML5, CSS3, and JavaScript (no frameworks required)
+- Google Gemini AI API
+- Modern CSS Grid and Flexbox layout
+- Responsive design with mobile-first approach
 
-**Frontend:**
-- Next.js 14 (App Router)
-- React 18
-- TypeScript
-- Tailwind CSS
-- Zustand (state management)
-- @google/genai (SDK)
+## 📝 API Information
 
-**Backend:**
-- Node 20
-- Express
-- @google/genai (SDK)
-- TypeScript
-- Pino (logging)
+The app uses Google's Gemini Pro API for AI responses. The API key is already configured in the `script.js` file.
 
-## Getting Started
+## 🌐 Browser Support
 
-### Prerequisites
+- Chrome (recommended)
+- Firefox
+- Safari
+- Edge
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
-- Node.js 20+
-- PNPM 8+
-- Gemini API key ([Get one here](https://ai.google.dev/))
-- Webcam and microphone
-
-### Installation
-
-1. **Clone the repository**
-
-```bash
-git clone <your-repo-url>
-cd gemini-robotics-live
-```
-
-2. **Install dependencies**
-
-```bash
-pnpm install
-```
-
-3. **Configure environment variables**
-
-Create `.env` file in `apps/server/`:
-
-```bash
-cd apps/server
-cp .env.example .env
-# Edit .env and add your Gemini API key
-```
-
-```env
-GEMINI_API_KEY=your_api_key_here
-PORT=5050
-```
-
-Create `.env.local` in `apps/web/`:
-
-```bash
-cd apps/web
-cp .env.local.example .env.local
-```
-
-```env
-NEXT_PUBLIC_SERVER_URL=http://localhost:5050
-```
-
-### Running the App
-
-**Option 1: Run both services together (recommended)**
-
-```bash
-# From root directory
-pnpm dev
-```
-
-**Option 2: Run services separately**
-
-```bash
-# Terminal 1 - Backend
-pnpm dev:server
-
-# Terminal 2 - Frontend
-pnpm dev:web
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Usage
-
-### 1. Spatial Reasoning (ER 1.5)
-
-**Detection Modes:**
-- **Points**: Detect object centers with labels
-- **Boxes**: Detect objects with bounding boxes
-- **Trajectory**: Plan movement paths
-
-**Controls:**
-- **Thinking Budget (0-8)**: Trade speed for accuracy
-  - 0-2: Fast, real-time (500-800ms)
-  - 3-5: Balanced
-  - 6-8: Highest accuracy (1-2s+)
-- **Object Queries**: Filter specific objects (e.g., "banana, bowl, cup")
-
-### 2. Live Conversation
-
-Click **"Start Live Session"** to:
-- Enable voice conversation with Gemini
-- Send text messages
-- Receive audio responses
-- View real-time transcripts
-
-### 3. Performance Tips
-
-- Start with **Thinking Budget = 0** for low latency
-- Use **object queries** to reduce processing time
-- Default frame rate is ~2 fps (configurable in `VideoCanvas.tsx`)
-- Frames are downscaled to 960px for efficiency
-
-## API Endpoints
-
-### Backend (`http://localhost:5050`)
-
-#### POST `/api/er/frame`
-Process a video frame with ER 1.5
-
-**Request:**
-```json
-{
-  "imageBase64": "base64_jpeg_string",
-  "mode": "points|boxes|trajectory",
-  "queries": ["banana", "bowl"],
-  "thinkingBudget": 0
-}
-```
-
-**Response:**
-```json
-{
-  "results": [
-    {
-      "point": [450, 320],
-      "label": "banana",
-      "box": [400, 280, 500, 360]
-    }
-  ],
-  "latencyMs": 650
-}
-```
-
-#### POST `/api/live/token`
-Get ephemeral token for Live API
-
-**Request:**
-```json
-{
-  "model": "gemini-2.5-flash-native-audio-preview-09-2025"
-}
-```
-
-**Response:**
-```json
-{
-  "token": "ephemeral_token_string",
-  "expireTime": "2025-09-30T12:30:00Z",
-  "newSessionExpireTime": "2025-09-30T12:01:00Z"
-}
-```
-
-## Coordinate System
-
-ER 1.5 returns normalized coordinates (0-1000):
-- **Points**: `[y, x]` - center position
-- **Boxes**: `[ymin, xmin, ymax, xmax]` - bounding box
-
-Convert to pixels:
-```typescript
-const px = (x / 1000) * canvasWidth;
-const py = (y / 1000) * canvasHeight;
-```
-
-## Security
-
-✅ **Secure by Design:**
-- Long-lived API key never exposed to browser
-- Ephemeral tokens for Live API (single-use, short-lived)
-- CORS protection on backend
-- No frame storage on server
-
-## Privacy & Compliance
-
-⚠️ **Important:**
-- Camera is active when app is running
-- Frames are sent to Google Gemini API for processing
-- No frames are stored locally or on server
-- **Always obtain consent** if others may appear on camera
-- Consider face-blurring for public deployments
-
-## Troubleshooting
-
-### Camera not working
-- Check browser permissions
-- Ensure HTTPS in production (getUserMedia requires secure context)
-- Try different browsers (Chrome/Edge recommended)
-
-### ER API errors
-- Verify `GEMINI_API_KEY` is set correctly
-- Check API quota/limits
-- Ensure model ID is correct: `gemini-robotics-er-1.5-preview`
-
-### Live API connection fails
-- Check network connectivity
-- Verify ephemeral token generation
-- Try refreshing the token (auto-refreshes every ~9 min)
-
-### High latency
-- Reduce thinking budget to 0-2
-- Use specific object queries
-- Check network speed
-- Consider reducing frame rate
-
-## Development
-
-### Project Structure
-
-```
-apps/web/src/
-├── app/
-│   ├── page.tsx          # Main UI
-│   ├── layout.tsx        # Root layout
-│   └── globals.css       # Global styles
-├── components/
-│   ├── VideoCanvas.tsx   # Camera capture & ER processing
-│   └── Overlay.tsx       # Visual overlay renderer
-└── lib/
-    ├── store.ts          # Zustand state
-    ├── types.ts          # TypeScript types
-    ├── draw.ts           # Canvas drawing utils
-    └── liveClient.ts     # Live API client
-
-apps/server/src/
-├── index.ts              # Express app
-├── routes/
-│   ├── er.ts             # ER frame processing
-│   └── liveToken.ts      # Token generation
-├── lib/
-│   └── gemini.ts         # Gemini SDK client
-└── types.ts              # Shared types
-```
-
-### Build for Production
-
-```bash
-# Build all apps
-pnpm build
-
-# Start production servers
-pnpm start
-```
-
-## Deployment
-
-### 🚀 One-Click Deploy to Render
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JackkySpice/Gemini-computer-vision)
-
-**Easiest option**: Click the button above to deploy both frontend and backend!
-- ✅ No manual configuration needed
-- ✅ Both services deployed together
-- ✅ Free tier available
-- 📖 **[One-Click Deploy Guide](ONE_CLICK_DEPLOY.md)** - Complete instructions
-- 🔍 **[Compare All Options](DEPLOYMENT_COMPARISON.md)** - See which deployment method is best for you
-
-### 📚 Other Deployment Options
-
-**→ Start Here:** [DEPLOYMENT_INDEX.md](DEPLOYMENT_INDEX.md) - Complete documentation index
-
-**Platform-Specific Guides:**
-- 📖 **[Render Deployment](RENDER_DEPLOYMENT.md)** - Manual Render setup
-- 📖 **[Vercel + Railway](DEPLOYMENT_QUICK_START.md)** - 5-minute deployment
-- 📖 **[Vercel Deployment](VERCEL_DEPLOYMENT.md)** - Comprehensive guide
-- 📖 **[Docker Deployment](DEPLOYMENT.md#option-2-docker-deployment)** - Container setup
-- 📖 **[VPS Deployment](DEPLOYMENT.md#option-3-vps-digitalocean-aws-etc)** - Self-hosted
-
-**Troubleshooting:**
-- 📖 **[Issue Resolution](DEPLOYMENT_ISSUES_FIXED.md)** - Common problems
-- 📖 **[Fix Summary](DEPLOYMENT_FIX_SUMMARY.md)** - Error solutions
-- 📖 **[Architecture Diagram](DEPLOYMENT_DIAGRAM.md)** - System architecture
-
-**Helper Scripts:**
-```bash
-./deploy-vercel.sh   # Deploy frontend to Vercel (automated)
-./deploy-railway.sh  # Deploy backend to Railway (automated)
-```
-
-## Roadmap
-
-- [x] Deployment guides (Vercel, Railway, etc.) ✅
-- [ ] LiveKit integration for WebRTC
-- [ ] Multi-frame video tracking
-- [ ] ROS/robotics controller integration
-- [ ] Object persistence across frames
-- [ ] Demo image upload (no camera)
-
-## Resources
-
-**API Documentation:**
-- [Gemini ER 1.5 Docs](https://ai.google.dev/gemini-api/docs/robotics-overview)
-- [Live API Guide](https://ai.google.dev/gemini-api/docs/live)
-- [Ephemeral Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens)
-- [LiveKit Integration](https://docs.livekit.io/agents/integrations/realtime/gemini/)
-
-**Deployment:**
-- [Vercel Documentation](https://vercel.com/docs)
-- [Railway Documentation](https://docs.railway.app)
-
-## License
-
-MIT
-
-## Contributing
-
-Contributions welcome! Please open an issue or PR.
-
----
-
-**Built with ❤️ using Gemini API**
+Enjoy chatting with your AI assistant! 💬
