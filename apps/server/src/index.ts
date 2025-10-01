@@ -20,8 +20,14 @@ app.use(
   })
 );
 
-// Body parser
+// Body parser with malformed JSON handling
 app.use(express.json({ limit: '10mb' }));
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (err?.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'Invalid JSON payload' });
+  }
+  next(err);
+});
 
 // Health check
 app.get('/health', (req, res) => {
