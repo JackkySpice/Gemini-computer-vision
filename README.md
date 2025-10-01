@@ -5,6 +5,12 @@ A production-ready web application combining **Gemini Robotics-ER 1.5** for spat
 ![Demo](https://img.shields.io/badge/Status-Preview-orange)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
+## 🚀 One-Click Deploy
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JackkySpice/Gemini-computer-vision)
+
+Deploy both frontend and backend to Render with a single click! See [ONE_CLICK_DEPLOY.md](ONE_CLICK_DEPLOY.md) for details.
+
 ## Features
 
 - 🎥 **Real-time Webcam Processing**: Stream video and get instant spatial analysis
@@ -288,26 +294,32 @@ pnpm start
 
 ## Deployment
 
-### 🚀 Quick Deploy (5 minutes)
+### 🚀 One-Click Deploy to Render
 
-**Got a Vercel error?** → See [DEPLOYMENT_FIX_SUMMARY.md](DEPLOYMENT_FIX_SUMMARY.md)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JackkySpice/Gemini-computer-vision)
 
-**Quick Steps:**
-1. **Backend (Railway):** Set Root Directory: `apps/server`
-2. **Frontend (Vercel):** Set Root Directory: `apps/web` ← **CRITICAL!**
-3. Configure environment variables
-4. Deploy!
+**Easiest option**: Click the button above to deploy both frontend and backend!
+- ✅ No manual configuration needed
+- ✅ Both services deployed together
+- ✅ Free tier available
+- 📖 **[One-Click Deploy Guide](ONE_CLICK_DEPLOY.md)** - Complete instructions
+- 🔍 **[Compare All Options](DEPLOYMENT_COMPARISON.md)** - See which deployment method is best for you
 
-### 📚 Complete Documentation
+### 📚 Other Deployment Options
 
 **→ Start Here:** [DEPLOYMENT_INDEX.md](DEPLOYMENT_INDEX.md) - Complete documentation index
 
-**Quick Links:**
-- 📖 **[Quick Start Guide](DEPLOYMENT_QUICK_START.md)** - 5-minute deployment
+**Platform-Specific Guides:**
+- 📖 **[Render Deployment](RENDER_DEPLOYMENT.md)** - Manual Render setup
+- 📖 **[Vercel + Railway](DEPLOYMENT_QUICK_START.md)** - 5-minute deployment
 - 📖 **[Vercel Deployment](VERCEL_DEPLOYMENT.md)** - Comprehensive guide
-- 📖 **[Architecture Diagram](DEPLOYMENT_DIAGRAM.md)** - System architecture
-- 📖 **[Issue Resolution](DEPLOYMENT_ISSUES_FIXED.md)** - Troubleshooting
+- 📖 **[Docker Deployment](DEPLOYMENT.md#option-2-docker-deployment)** - Container setup
+- 📖 **[VPS Deployment](DEPLOYMENT.md#option-3-vps-digitalocean-aws-etc)** - Self-hosted
+
+**Troubleshooting:**
+- 📖 **[Issue Resolution](DEPLOYMENT_ISSUES_FIXED.md)** - Common problems
 - 📖 **[Fix Summary](DEPLOYMENT_FIX_SUMMARY.md)** - Error solutions
+- 📖 **[Architecture Diagram](DEPLOYMENT_DIAGRAM.md)** - System architecture
 
 **Helper Scripts:**
 ```bash

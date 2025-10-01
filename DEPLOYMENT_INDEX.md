@@ -1,26 +1,44 @@
 # 📚 Deployment Documentation Index
 
-## 🚨 Start Here - Your Error Is Fixed!
+## 🚀 One-Click Deploy (Easiest!)
 
-**Your Error:**
-```
-Error: No Output Directory named "public" found after the Build completed
-```
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JackkySpice/Gemini-computer-vision)
 
-**Solution:**
-```
-Set Root Directory to "apps/web" in Vercel Dashboard Settings → General
-```
+**→ [ONE_CLICK_DEPLOY.md](ONE_CLICK_DEPLOY.md)** - Deploy both services with one click!
+- ⏱️ Time: 5-8 minutes (fully automated)
+- ✅ No manual configuration needed
+- 🎯 For: Everyone (easiest option!)
+- 📌 What happens:
+  - Both frontend and backend deployed together
+  - Automatic environment variable linking
+  - HTTPS enabled automatically
+  - Free tier available
+
+**→ [RENDER_QUICK_REFERENCE.md](RENDER_QUICK_REFERENCE.md)** - Quick reference card
+- Print-friendly checklist
+- All commands and URLs in one place
+- Troubleshooting quick fixes
 
 ---
 
-## 📖 Documentation Guide
+## 📖 Platform-Specific Guides
 
-### 1. Quick Start (Recommended)
+### 1. Render Deployment (Recommended)
+**→ [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)**
+- ⏱️ Time: 10-15 minutes
+- ✅ Manual step-by-step for Render
+- 🎯 For: Those who want control over settings
+- 📌 What you'll do:
+  - Deploy backend as Web Service
+  - Deploy frontend as Web Service
+  - Configure CORS manually
+  - Optimize for production
+
+### 2. Vercel + Railway (Alternative)
 **→ [DEPLOYMENT_QUICK_START.md](DEPLOYMENT_QUICK_START.md)**
 - ⏱️ Time: 5 minutes
 - ✅ Step-by-step deployment
-- 🎯 For: First-time deployment
+- 🎯 For: Split deployment across platforms
 - 📌 What you'll do:
   - Deploy backend to Railway
   - Deploy frontend to Vercel
