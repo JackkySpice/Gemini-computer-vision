@@ -1,12 +1,22 @@
 import { Router } from 'express';
 import { callER } from '../lib/gemini';
+import { VALIDATION } from '../lib/constants';
+import pino from 'pino';
 
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 const router = Router();
 
 // Benchmark endpoint for latency testing
 router.post('/latency', async (req, res) => {
   try {
     const { iterations = 10 } = req.body;
+    
+    // Validate iterations to prevent abuse
+    if (typeof iterations !== 'number' || iterations < VALIDATION.MIN_BENCHMARK_ITERATIONS || iterations > VALIDATION.MAX_BENCHMARK_ITERATIONS) {
+      return res.status(400).json({ 
+        error: `Iterations must be a number between ${VALIDATION.MIN_BENCHMARK_ITERATIONS} and ${VALIDATION.MAX_BENCHMARK_ITERATIONS}` 
+      });
+    }
     
     // Create a small test image (1x1 pixel base64 JPEG)
     const testImage = '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k=';
@@ -47,17 +57,22 @@ router.post('/latency', async (req, res) => {
     
     const avgLatency = successCount > 0 ? Math.round(totalLatency / successCount) : 0;
     
+    // Get successful results to avoid Infinity on empty arrays
+    const successfulLatencies = results.filter(r => r.status === 'success').map(r => r.latency);
+    const minLatency = successfulLatencies.length > 0 ? Math.min(...successfulLatencies) : 0;
+    const maxLatency = successfulLatencies.length > 0 ? Math.max(...successfulLatencies) : 0;
+    
     res.json({
       iterations,
       successCount,
       failureCount,
       avgLatency,
-      minLatency: Math.min(...results.filter(r => r.status === 'success').map(r => r.latency)),
-      maxLatency: Math.max(...results.filter(r => r.status === 'success').map(r => r.latency)),
+      minLatency,
+      maxLatency,
       results,
     });
   } catch (error: any) {
-    console.error('Benchmark error:', error);
+    logger.error({ error: error.message }, 'Benchmark error');
     res.status(500).json({ error: error.message || 'Benchmark failed' });
   }
 });

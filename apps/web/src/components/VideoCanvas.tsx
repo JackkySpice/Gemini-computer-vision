@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '@/lib/store';
+import { useMediaStream } from '@/lib/MediaStreamContext';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5050';
 
 export default function VideoCanvas() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const frameCountRef = useRef(0);
@@ -16,18 +16,13 @@ export default function VideoCanvas() {
   const requestInFlightRef = useRef(false);
 
   const { erMode, thinkingBudget, queries, setErResults, setLatency, setFps } = useStore();
+  const { getMediaStream } = useMediaStream();
 
-  // Start camera
+  // Start camera using shared media stream
   useEffect(() => {
-    let mediaStream: MediaStream | null = null;
-
     const startCamera = async () => {
       try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({
-          video: { width: 1280, height: 720 },
-          audio: true,
-        });
-        setStream(mediaStream);
+        const mediaStream = await getMediaStream();
         if (videoRef.current) {
           videoRef.current.srcObject = mediaStream;
         }
@@ -38,13 +33,7 @@ export default function VideoCanvas() {
     };
 
     startCamera();
-
-    return () => {
-      if (mediaStream) {
-        mediaStream.getTracks().forEach((track) => track.stop());
-      }
-    };
-  }, []);
+  }, [getMediaStream]);
 
   // Frame capture and ER processing
   useEffect(() => {
