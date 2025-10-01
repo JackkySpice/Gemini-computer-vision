@@ -7,10 +7,6 @@ const apiKey = process.env.GEMINI_API_KEY || '';
 const isDev = process.env.NODE_ENV !== 'production';
 const useMock = process.env.USE_MOCK === 'true';
 
-if (!apiKey && !useMock) {
-  throw new Error('GEMINI_API_KEY environment variable is required');
-}
-
 const client = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 export async function callER(
@@ -139,13 +135,15 @@ export async function createEphemeralToken(
       newSessionExpireTime,
     };
   } catch (error: any) {
-    logger.warn({ error: error.message }, 'Failed to create ephemeral token, using API key directly');
-    // Fallback: return the API key directly with a warning
-    // This is for development only - in production, ephemeral tokens should work
-    return {
-      token: apiKey,
-      expireTime,
-      newSessionExpireTime,
-    };
+    logger.warn({ error: error.message }, 'Failed to create ephemeral token');
+    if (isDev || useMock) {
+      logger.info('Returning mock ephemeral token due to failure (dev/mock mode)');
+      return {
+        token: 'mock-ephemeral-token-' + Date.now(),
+        expireTime,
+        newSessionExpireTime,
+      };
+    }
+    throw new Error('Failed to create ephemeral token');
   }
 }

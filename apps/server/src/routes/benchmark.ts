@@ -46,14 +46,17 @@ router.post('/latency', async (req, res) => {
     }
     
     const avgLatency = successCount > 0 ? Math.round(totalLatency / successCount) : 0;
+    const successLatencies = results.filter(r => r.status === 'success').map(r => r.latency);
+    const minLatency = successLatencies.length > 0 ? Math.min(...successLatencies) : null;
+    const maxLatency = successLatencies.length > 0 ? Math.max(...successLatencies) : null;
     
     res.json({
       iterations,
       successCount,
       failureCount,
       avgLatency,
-      minLatency: Math.min(...results.filter(r => r.status === 'success').map(r => r.latency)),
-      maxLatency: Math.max(...results.filter(r => r.status === 'success').map(r => r.latency)),
+      minLatency,
+      maxLatency,
       results,
     });
   } catch (error: any) {

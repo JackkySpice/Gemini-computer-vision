@@ -25,7 +25,7 @@ export default function VideoCanvas() {
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({
           video: { width: 1280, height: 720 },
-          audio: true,
+          audio: false,
         });
         setStream(mediaStream);
         if (videoRef.current) {
