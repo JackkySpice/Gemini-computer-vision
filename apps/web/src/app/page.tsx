@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useStore } from '@/lib/store';
+import { useMediaStream } from '@/lib/MediaStreamContext';
 import VideoCanvas from '@/components/VideoCanvas';
 import Overlay from '@/components/Overlay';
 import { LiveClient } from '@/lib/liveClient';
@@ -27,7 +28,8 @@ export default function Home() {
   const [videoSize, setVideoSize] = useState({ width: 1280, height: 720 });
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const liveClientRef = useRef<LiveClient | null>(null);
-  const mediaStreamRef = useRef<MediaStream | null>(null);
+  
+  const { getMediaStream } = useMediaStream();
 
   // Update video size based on actual rendered size
   useEffect(() => {
@@ -58,13 +60,8 @@ export default function Home() {
 
   const handleStartLive = async () => {
     try {
-      // Get media stream
-      if (!mediaStreamRef.current) {
-        mediaStreamRef.current = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: false,
-        });
-      }
+      // Get shared media stream
+      const mediaStream = await getMediaStream();
 
       // Create live client
       liveClientRef.current = new LiveClient({
@@ -78,7 +75,7 @@ export default function Home() {
         },
       });
 
-      await liveClientRef.current.start(mediaStreamRef.current);
+      await liveClientRef.current.start(mediaStream);
       setLiveActive(true);
     } catch (error: any) {
       console.error('Failed to start Live API:', error);
@@ -90,11 +87,6 @@ export default function Home() {
     if (liveClientRef.current) {
       liveClientRef.current.stop();
       liveClientRef.current = null;
-    }
-
-    if (mediaStreamRef.current) {
-      mediaStreamRef.current.getTracks().forEach((track) => track.stop());
-      mediaStreamRef.current = null;
     }
 
     setLiveActive(false);

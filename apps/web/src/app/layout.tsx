@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { MediaStreamProvider } from '@/lib/MediaStreamContext';
 
 export const metadata: Metadata = {
   title: 'Gemini Robotics Live',
@@ -13,7 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ErrorBoundary>
+          <MediaStreamProvider>
+            {children}
+          </MediaStreamProvider>
+        </ErrorBoundary>
+      </body>
     </html>
   );
 }

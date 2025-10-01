@@ -20,7 +20,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_SERVER_URL=http://server:5050
+      # Use localhost for browser API calls, not internal Docker hostname
+      - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-http://localhost:5050}
     depends_on:
       - server
     restart: unless-stopped

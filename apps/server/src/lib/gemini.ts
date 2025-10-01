@@ -1,11 +1,12 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { ERPoint, ERTrajectory } from '../types';
+import { MODELS } from './constants';
 import pino from 'pino';
 
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 const apiKey = process.env.GEMINI_API_KEY || '';
 const isDev = process.env.NODE_ENV !== 'production';
-const useMock = process.env.USE_MOCK === 'true';
+const useMock = process.env.USE_MOCK === 'true' && process.env.NODE_ENV !== 'production';
 
 if (!apiKey && !useMock) {
   throw new Error('GEMINI_API_KEY environment variable is required');
@@ -42,7 +43,7 @@ export async function callER(
   }
 
   const model = client.getGenerativeModel({
-    model: 'gemini-robotics-er-1.5-preview',
+    model: MODELS.ER,
   });
 
   const image = {
@@ -52,7 +53,7 @@ export async function callER(
     },
   };
 
-  logger.debug({ model: 'gemini-robotics-er-1.5-preview' }, 'Calling Gemini ER API');
+  logger.debug({ model: MODELS.ER }, 'Calling Gemini ER API');
 
   try {
     // Note: thinkingConfig/thinkingBudget is not yet available in the current API
@@ -139,13 +140,8 @@ export async function createEphemeralToken(
       newSessionExpireTime,
     };
   } catch (error: any) {
-    logger.warn({ error: error.message }, 'Failed to create ephemeral token, using API key directly');
-    // Fallback: return the API key directly with a warning
-    // This is for development only - in production, ephemeral tokens should work
-    return {
-      token: apiKey,
-      expireTime,
-      newSessionExpireTime,
-    };
+    logger.error({ error: error.message }, 'Failed to create ephemeral token');
+    // Security: Never send API key to client - throw error instead
+    throw new Error('Token generation failed. Please try again later.');
   }
 }

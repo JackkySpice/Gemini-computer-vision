@@ -93,24 +93,24 @@ export class LiveClient {
     if (!this.session || !this.mediaStream || !this.audioContext) return;
 
     try {
+      // Use modern AudioWorklet API instead of deprecated ScriptProcessor
+      await this.audioContext.audioWorklet.addModule('/audio-processor-worklet.js');
+      
       const source = this.audioContext.createMediaStreamSource(this.mediaStream);
-      const processor = this.audioContext.createScriptProcessor(4096, 1, 1);
+      const processor = new AudioWorkletNode(this.audioContext, 'audio-processor');
 
-      processor.onaudioprocess = (e) => {
-        const inputData = e.inputBuffer.getChannelData(0);
-        const pcm16 = new Int16Array(inputData.length);
-        
-        for (let i = 0; i < inputData.length; i++) {
-          pcm16[i] = Math.max(-32768, Math.min(32767, inputData[i] * 32768));
+      // Listen for audio data from the worklet
+      processor.port.onmessage = (event) => {
+        if (event.data.type === 'audio') {
+          // @ts-ignore
+          this.session?.sendAudio?.(event.data.data);
         }
-
-        // @ts-ignore
-        this.session?.sendAudio?.(pcm16.buffer);
       };
 
       source.connect(processor);
       processor.connect(this.audioContext.destination);
     } catch (error: any) {
+      console.error('Audio streaming error:', error);
       this.config.onError?.(error);
     }
   }
@@ -150,7 +150,7 @@ export class LiveClient {
     console.log('Setting up token auto-refresh in 8 minutes');
     
     this.refreshInterval = setInterval(async () => {
-      console.log('Auto-refreshing ephemeral token');
+      console.log('Auto-refreshing ephemeral token and reconnecting session');
       try {
         const response = await fetch(`${SERVER_URL}/api/live/token`, {
           method: 'POST',
@@ -164,14 +164,47 @@ export class LiveClient {
           this.tokenExpireTime = data.expireTime;
           this.newSessionExpireTime = data.newSessionExpireTime;
           
-          // Recreate client with new token
-          if (this.token) {
+          // Reconnect session with new token
+          if (this.token && this.mediaStream) {
+            // Disconnect old session
+            if (this.session) {
+              // @ts-ignore
+              this.session.disconnect?.();
+            }
+            
+            // Create new client and reconnect
             this.client = new GoogleGenerativeAI(this.token);
-            console.log('Token refreshed successfully');
+            
+            // @ts-ignore - Live API types may not be complete
+            this.session = await this.client.live.connect({
+              model: 'gemini-2.5-flash-native-audio-preview-09-2025',
+              config: {
+                responseModalities: ['AUDIO', 'TEXT'],
+              },
+            });
+
+            // Re-setup callbacks
+            this.session.on('transcript', (transcript: string) => {
+              this.config.onTranscript?.(transcript);
+            });
+
+            this.session.on('audio', (audioData: ArrayBuffer) => {
+              this.config.onAudio?.(audioData);
+              this.playAudio(audioData);
+            });
+
+            this.session.on('error', (error: Error) => {
+              this.config.onError?.(error);
+            });
+
+            // Restart audio streaming
+            await this.streamAudio();
+            
+            console.log('Token refreshed and session reconnected successfully');
           }
         }
       } catch (error) {
-        console.error('Failed to refresh token:', error);
+        console.error('Failed to refresh token and reconnect:', error);
         this.config.onError?.(error as Error);
       }
     }, refreshTime);
